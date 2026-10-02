@@ -6,7 +6,6 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import contactRoutes from './backend/routes/contact.ts';
 import { errorHandler } from './backend/middleware/errorHandler.ts';
-import { connectDB } from './backend/config/database.ts';
 
 dotenv.config();
 
@@ -71,9 +70,6 @@ async function startServer() {
   // Request size limits & body parsers
   app.use(express.json({ limit: '100kb' }));
   app.use(express.urlencoded({ extended: true, limit: '100kb' }));
-
-  // Connect Database
-  await connectDB();
 
   // API Routes
   app.use('/api', contactRoutes);

@@ -34,39 +34,24 @@ All client code resides under `/src`.
 The backend is built with:
 - **Node.js** + **Express.js**
 - **Helmet** (Security headers)
-- **CORS** (Configured cross-origin resource sharing)
-- **Mongoose / MongoDB** (Persistent contact inquiries with graceful in-memory fallback)
+- **CORS** (Configured cross-origin resource sharing with dynamic development preview origin support)
+- **Persistent Message Store** (File-backed JSON repository with in-memory caching)
 - **Input Validation** (Name, email format, subject, and length bounds)
 - **Centralized Error Handling** (Formatted JSON error responses)
 
 API Endpoints:
-- `POST /api/contact` - Submits a contact inquiry (saves to MongoDB/memory store)
+- `POST /api/contact` - Submits a contact inquiry
 - `GET /api/contact/messages` - Retrieves recent contact messages
 - `GET /api/health` - Health check status endpoint (`{"status":"ok"}`)
 
 ---
 
-## 4. MongoDB Setup
-
-1. Create a cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) or run MongoDB locally.
-2. Obtain your connection string:
-   ```
-   mongodb+srv://<username>:<password>@cluster0.mongodb.net/dhirendra_portfolio?retryWrites=true&w=majority
-   ```
-3. Set `MONGODB_URI` in `.env` (required for persistent MongoDB connection).
-4. If `MONGODB_URI` is not provided during preview, an in-memory fallback store is used so the contact form works without interruption during development.
-
----
-
-## 5. Environment Variables
+## 4. Environment Variables
 
 Create a `.env` file in the project root:
 
 ```env
 PORT=3000
-
-# MONGODB_URI: Required for persistent MongoDB connection
-MONGODB_URI=
 
 # CLIENT_URL: Optional during development.
 # If left empty, current development and AI Studio preview origins are allowed automatically.
